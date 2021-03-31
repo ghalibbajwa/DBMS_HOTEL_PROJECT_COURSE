@@ -49,6 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HMSContext.cs" />
+    <Compile Include="Migrations\202103311315578_BasicEntities.cs" />
+    <Compile Include="Migrations\202103311315578_BasicEntities.Designer.cs">
+      <DependentUpon>202103311315578_BasicEntities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +65,11 @@
       <Project>{31af1f52-ebbb-49dc-b2e9-f9c70bdc3642}</Project>
       <Name>HMS.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202103311315578_BasicEntities.resx">
+      <DependentUpon>202103311315578_BasicEntities.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
