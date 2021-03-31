@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data.Entity;
 using HMS.Entities;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HMS.Data
 
 {
-    public class HMSContext : DbContext
+    public class HMSContext : IdentityDbContext
     {
         public HMSContext() : base("HMSConnectionString")
         {
@@ -16,5 +17,11 @@ namespace HMS.Data
         public DbSet<AccomodationPackage> AccomodationPackages { get; set; }
         public DbSet<Accomodation> Accomodations { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+
+
+        public static HMSContext Create()
+        {
+            return new HMSContext();
+        }
     }
 }
