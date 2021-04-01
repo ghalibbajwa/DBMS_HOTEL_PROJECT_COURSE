@@ -2,6 +2,9 @@
 
 @model DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.ViewModels.AccomodationTypesListingModels
 
+
+
+
 <div class="row">
     <div class="col col-lg-12">
         <h2>Accomodation Types</h2>
@@ -18,6 +21,7 @@
                     <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search mr-1"></i> Search</button>
                     <a class="btn btn-outline-secondary" href="@Url.Action("Index", "AccomodationTypes")"><i class="fas fa-redo-alt mr-1"></i> Reset</a>
                     <button data-href="@Url.Action("Action", "AccomodationTypes")" class="data-btn btn btn-outline-success" type="button" data-toggle="modal" data-target="#actionModal"><i class="fas fa-plus mr-1"></i> Create</button>
+                    
                 </div>
             </div>
         </form>
@@ -34,16 +38,21 @@
 
 <div class="modal fade" id="actionModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
+        <script>
+            console.log('adsa');
+        </script>
     </div>
 </div>
 
 <script>
-	$(".data-btn").click(function () {
+    $(".data-btn").click(function () {
 		$.ajax({
 			url: $(this).attr("data-href"),
 		})
-		.done(function (response) {
+            .done(function (response) {
+            console.log('ada');
 			$("#actionModal .modal-dialog").html(response);
 		});
 	});
 </script>
+

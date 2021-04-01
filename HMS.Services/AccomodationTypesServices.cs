@@ -14,7 +14,7 @@ namespace HMS.Services
         {
             var context = new HMSContext();
 
-            return context.AccomodationTypes.AsEnumerable() ;
+            return context.AccomodationTypes.ToList() ;
         }
 
         public bool SaveAccomodationType(AccomodationType accomodationType)

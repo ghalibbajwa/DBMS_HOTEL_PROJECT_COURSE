@@ -2,8 +2,7 @@
 @model DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.ViewModels.AccomodationTypesListingModels
 
 
-@if (Model != null && Model.AccomodationTypes != null && Model.AccomodationTypes.Count() > 0)
-{
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -32,9 +31,4 @@
         </tbody>
     </table>
 }
-else
-{
-    <div class="alert alert-warning" role="alert">
-        Sorry! No records exist.
-    </div>
-}
+
