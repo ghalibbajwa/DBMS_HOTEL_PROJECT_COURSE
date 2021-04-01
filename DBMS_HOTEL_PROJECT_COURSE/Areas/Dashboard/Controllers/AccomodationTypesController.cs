@@ -27,10 +27,35 @@ namespace DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.Controllers
 
             return PartialView("_Listing", model);
         }
+        [HttpGet]
         public ActionResult Action()
         {
             AccomodationTypesActionModels model = new AccomodationTypesActionModels();
             return PartialView("_Action");
+        }
+
+        [HttpPost]
+        public JsonResult Action(AccomodationTypesActionModels model)
+        {
+            JsonResult json = new JsonResult();
+
+            AccomodationType accomodationType = new AccomodationType();
+
+            accomodationType.Name = model.Name;
+            accomodationType.Description = model.Description;
+
+            var result = accomodationTypesServices.SaveAccomodationType(accomodationType);
+
+            if (result)
+            {
+                json.Data = new { Success = true };
+            }
+            else
+            {
+                json.Data = new {Success= false, Message = "Unable to Add Accomodation Type"}
+            }
+
+            return json;
         }
 
     }

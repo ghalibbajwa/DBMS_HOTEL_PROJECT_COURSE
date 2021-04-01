@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HMS.Services
 {
@@ -14,6 +15,15 @@ namespace HMS.Services
             var context = new HMSContext();
 
             return context.AccomodationTypes.AsEnumerable() ;
+        }
+
+        public bool SaveAccomodationType(AccomodationType accomodationType)
+        {
+            var context = new HMSContext();
+
+            context.AccomodationTypes.Add(accomodationType);
+
+            return context.SaveChanges() > 0;
         }
     }
 }
