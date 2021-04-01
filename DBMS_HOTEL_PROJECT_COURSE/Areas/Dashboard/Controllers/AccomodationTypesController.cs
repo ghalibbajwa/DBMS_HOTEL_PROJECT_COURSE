@@ -20,16 +20,17 @@ namespace DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.Controllers
         [HttpGet]
         public ActionResult Listing()
         {
+            System.Diagnostics.Debug.WriteLine("This is a log");
             AccomodationTypesListingModels model = new AccomodationTypesListingModels();
 
             model.AccomodationTypes = accomodationTypesServices.GetAllAccomodationTypes();
-            return PartialView("_Listing", model.AccomodationTypes);
+            return PartialView("_Listing", model);
         }
         [HttpGet]
         public ActionResult Action()
         {
             AccomodationTypesActionModels model = new AccomodationTypesActionModels();
-            Console.WriteLine("cont");
+            System.Diagnostics.Debug.WriteLine("This is a log2");
             return PartialView("_Action", model);
             
         }

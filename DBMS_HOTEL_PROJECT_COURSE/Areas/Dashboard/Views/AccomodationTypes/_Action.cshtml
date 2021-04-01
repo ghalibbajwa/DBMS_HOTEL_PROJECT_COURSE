@@ -46,13 +46,15 @@
 <script>
 	$("#actionButton").click(function () {
 		$.ajax({
-			url: '@Url.Action("Action", "AccomodationTypes")',
+            url: '@Url.Action("Action", "AccomodationTypes")',
 			type: "post",
 			data: $("#actionForm").serialize()
 		})
 		.done(function (response) {
 			if(response.Success)
-			{
+            {
+                
+                
 				location.reload();
 			}
 			else {
