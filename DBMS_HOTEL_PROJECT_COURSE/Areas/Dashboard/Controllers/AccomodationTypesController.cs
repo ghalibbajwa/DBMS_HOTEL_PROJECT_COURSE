@@ -27,10 +27,16 @@ namespace DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.Controllers
             return PartialView("_Listing", model);
         }
         [HttpGet]
-        public ActionResult Action()
+        public ActionResult Action(int? ID)
         {
             AccomodationTypesActionModels model = new AccomodationTypesActionModels();
-            System.Diagnostics.Debug.WriteLine("This is a log2");
+            if (ID.HasValue) //for editing
+            {
+                var accomodationType = accomodationTypesServices.GetAllAccomodationTypeByID(ID.Value);
+                model.ID = accomodationType.ID;
+                model.Name = accomodationType.Name;
+                model.Description = accomodationType.Description;
+            }
             return PartialView("_Action", model);
             
         }
@@ -40,13 +46,27 @@ namespace DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.Controllers
         {
             Console.WriteLine("cont");
             JsonResult json = new JsonResult();
+            var result = false;
+            if (model.ID>0) //edit
+            {
+                var accomodationType = accomodationTypesServices.GetAllAccomodationTypeByID(model.ID);
+                accomodationType.Name = model.Name;
+                accomodationType.Description = model.Description;
 
-            AccomodationType accomodationType = new AccomodationType();
+                result = accomodationTypesServices.UpdateAccomodationType(accomodationType);
+                
+            }
+            else { //create
 
-            accomodationType.Name = model.Name;
-            accomodationType.Description = model.Description;
+                AccomodationType accomodationType = new AccomodationType();
 
-            var result = accomodationTypesServices.SaveAccomodationType(accomodationType);
+                accomodationType.Name = model.Name;
+                accomodationType.Description = model.Description;
+
+                result = accomodationTypesServices.SaveAccomodationType(accomodationType);
+            }
+
+           
 
             if (result)
             {
@@ -54,7 +74,7 @@ namespace DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.Controllers
             }
             else
             {
-                json.Data = new { Success = false, Message = "Unable to Add Accomodation Type" };
+                json.Data = new { Success = false, Message = "Action Failed" };
             }
 
             return json;

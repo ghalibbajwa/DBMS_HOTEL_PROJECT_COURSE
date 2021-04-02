@@ -17,6 +17,13 @@ namespace HMS.Services
             return context.AccomodationTypes.ToList() ;
         }
 
+        public AccomodationType GetAllAccomodationTypeByID(int ID)
+        {
+            var context = new HMSContext();
+
+            return context.AccomodationTypes.Find(ID);
+        }
+
         public bool SaveAccomodationType(AccomodationType accomodationType)
         {
             var context = new HMSContext();
@@ -25,5 +32,16 @@ namespace HMS.Services
 
             return context.SaveChanges() > 0;
         }
+
+
+        public bool UpdateAccomodationType(AccomodationType accomodationType)
+        {
+            var context = new HMSContext();
+
+            context.Entry(accomodationType).State = System.Data.Entity.EntityState.Modified;
+
+            return context.SaveChanges() > 0;
+        }
+
     }
 }
