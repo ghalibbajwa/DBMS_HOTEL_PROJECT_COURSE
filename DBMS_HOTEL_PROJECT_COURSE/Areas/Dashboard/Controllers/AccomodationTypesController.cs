@@ -80,5 +80,42 @@ namespace DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.Controllers
             return json;
         }
 
+        [HttpGet]
+        public ActionResult Delete(int ID)
+        {
+            AccomodationTypesActionModels model = new AccomodationTypesActionModels();
+          
+              var accomodationType = accomodationTypesServices.GetAllAccomodationTypeByID(ID);
+            model.ID = accomodationType.ID;  
+
+        
+            return PartialView("_Delete", model);
+
+        }
+        [HttpPost]
+        public JsonResult Delete(AccomodationTypesActionModels model)
+        {
+            Console.WriteLine("cont");
+            JsonResult json = new JsonResult();
+            var result = false;
+            var accomodationType = accomodationTypesServices.GetAllAccomodationTypeByID(model.ID);
+            
+
+            result = accomodationTypesServices.DeleteAccomodationType(accomodationType);
+
+
+
+            if (result)
+            {
+                json.Data = new { Success = true };
+            }
+            else
+            {
+                json.Data = new { Success = false, Message = "Action Failed" };
+            }
+
+            return json;
+        }
+
     }
 }
