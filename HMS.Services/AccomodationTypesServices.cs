@@ -51,5 +51,18 @@ namespace HMS.Services
             return context.SaveChanges() > 0;
         }
 
+        public IEnumerable<AccomodationType> SearchAllAccomodationTypes(string searchTerm)
+        {
+            var context = new HMSContext();
+            var accomodationTypes = context.AccomodationTypes.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                accomodationTypes= accomodationTypes.Where(a => a.Name.ToLower().Contains(searchTerm.ToLower()));
+            }
+
+            return accomodationTypes.ToList();
+        }
+
     }
 }

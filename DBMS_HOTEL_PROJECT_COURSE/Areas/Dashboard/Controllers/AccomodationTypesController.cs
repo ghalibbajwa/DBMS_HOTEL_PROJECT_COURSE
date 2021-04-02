@@ -13,19 +13,16 @@ namespace DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.Controllers
     public class AccomodationTypesController : Controller
     {
         AccomodationTypesServices accomodationTypesServices = new AccomodationTypesServices();
-        public ActionResult Index()
+        public ActionResult Index(string searchTerm)
         {
-            return View(); 
-        }
-        [HttpGet]
-        public ActionResult Listing()
-        {
-            System.Diagnostics.Debug.WriteLine("This is a log");
             AccomodationTypesListingModels model = new AccomodationTypesListingModels();
+            model.SearchTerm = searchTerm;
 
-            model.AccomodationTypes = accomodationTypesServices.GetAllAccomodationTypes();
-            return PartialView("_Listing", model);
+            model.AccomodationTypes = accomodationTypesServices.SearchAllAccomodationTypes(searchTerm);
+            
+            return View(model); 
         }
+    
         [HttpGet]
         public ActionResult Action(int? ID)
         {
