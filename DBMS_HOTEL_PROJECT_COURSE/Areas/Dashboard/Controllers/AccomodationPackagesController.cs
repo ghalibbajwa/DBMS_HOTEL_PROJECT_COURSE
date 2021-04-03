@@ -17,10 +17,8 @@ namespace DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.Controllers
 
         //DashboardService dashboardService = new DashboardService();
 
-        public ActionResult Index(string searchTerm, int? accomodationTypeID, int? page)
+        public ActionResult Index(string searchTerm, int? accomodationTypeID)
         {
-            int recordSize = 5;
-            page = page ?? 1;
 
             AccomodationPackagesListingModel model = new AccomodationPackagesListingModel();
 
@@ -29,10 +27,10 @@ namespace DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.Controllers
 
             model.AccomodationTypes = accomodationTypesService.GetAllAccomodationTypes();
 
-            model.AccomodationPackages = accomodationPackagesService.SearchAccomodationPackages(searchTerm, accomodationTypeID, page.Value, recordSize);
+            model.AccomodationPackages = accomodationPackagesService.SearchAccomodationPackages(searchTerm, accomodationTypeID);
             var totalRecords = accomodationPackagesService.SearchAccomodationPackagesCount(searchTerm, accomodationTypeID);
 
-            model.Pager = new Pager(totalRecords, page, recordSize);
+           
 
             return View(model);
         }
@@ -71,7 +69,7 @@ namespace DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.Controllers
             List<int> pictureIDs = !string.IsNullOrEmpty(model.PictureIDs) ? model.PictureIDs.Split(',').Select(x => int.Parse(x)).ToList() : new List<int>();
            // var pictures = dashboardService.GetPicturesByIDs(pictureIDs);
 
-            if (model.ID > 0) //we are trying to edit a record
+            if (model.ID > 0) //edit
             {
                 var accomodationPackage = accomodationPackagesService.GetAccomodationPackageByID(model.ID);
 
@@ -85,7 +83,7 @@ namespace DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.Controllers
 
                 result = accomodationPackagesService.UpdateAccomodationPackage(accomodationPackage);
             }
-            else //we are trying to create a record
+            else //create
             {
                 AccomodationPackage accomodationPackage = new AccomodationPackage();
 

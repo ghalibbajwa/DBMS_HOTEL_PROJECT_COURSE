@@ -23,7 +23,7 @@ namespace HMS.Services
             return context.AccomodationPackages.Where(x => x.AccomodationTypeID == accomodationTypeID).ToList();
         }
 
-        public IEnumerable<AccomodationPackage> SearchAccomodationPackages(string searchTerm, int? accomodationTypeID, int page, int recordSize)
+        public IEnumerable<AccomodationPackage> SearchAccomodationPackages(string searchTerm, int? accomodationTypeID)
         {
             var context = new HMSContext();
 
@@ -39,12 +39,7 @@ namespace HMS.Services
                 accomodationPackages = accomodationPackages.Where(a => a.AccomodationTypeID == accomodationTypeID.Value);
             }
 
-            var skip = (page - 1) * recordSize;
-            //  skip = (1    -  1) = 0 * 3 = 0
-            //  skip = (2    -  1) = 1 * 3 = 3
-            //  skip = (3    -  1) = 2 * 3 = 6
-
-            return accomodationPackages.OrderBy(x => x.AccomodationTypeID).Skip(skip).Take(recordSize).ToList();
+            return accomodationPackages.ToList();
         }
 
         public int SearchAccomodationPackagesCount(string searchTerm, int? accomodationTypeID)
@@ -68,9 +63,11 @@ namespace HMS.Services
 
         public AccomodationPackage GetAccomodationPackageByID(int ID)
         {
-            var context = new HMSContext();
+            using (var context = new HMSContext())
+            {
+                return context.AccomodationPackages.Find(ID);
+            }
 
-            return context.AccomodationPackages.Find(ID);
         }
 
         public bool SaveAccomodationPackage(AccomodationPackage accomodationPackage)
@@ -84,6 +81,9 @@ namespace HMS.Services
 
         public bool UpdateAccomodationPackage(AccomodationPackage accomodationPackage)
         {
+
+            
+
             var context = new HMSContext();
 
             var exitingAccomodationPackage = context.AccomodationPackages.Find(accomodationPackage.ID);
