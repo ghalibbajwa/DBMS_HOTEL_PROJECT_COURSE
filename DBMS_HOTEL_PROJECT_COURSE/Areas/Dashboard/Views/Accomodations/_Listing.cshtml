@@ -1,0 +1,47 @@
+﻿@model  DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.ViewModels.AccomodationsListingModel
+
+
+@if (Model != null && Model.Accomodations != null && Model.Accomodations.Count() > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Accomodation Package</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var accomodation in Model.Accomodations)
+            {
+                <tr>
+                    <td>
+                        @accomodation.Name
+                    </td>
+                    <td>
+                        @accomodation.Description
+                    </td>
+                    <td>
+                        @if (accomodation.AccomodationPackage != null)
+                        {
+                            @accomodation.AccomodationPackage.Name
+                        }
+                    </td>
+                    <td>
+                        <button data-href="@Url.Action("Action", "Accomodations", new { ID = accomodation.ID })" type="button" class="data-btn btn btn-primary" data-toggle="modal" data-target="#actionModal"><i class="fas fa-pen mr-1"></i> Edit</button>
+                        <button data-href="@Url.Action("Delete", "Accomodations", new { ID = accomodation.ID })" type="button" class="data-btn btn btn-danger" data-toggle="modal" data-target="#actionModal"><i class="fas fa-trash-alt mr-1"></i> Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+        }
+        else
+        {
+    <div class="alert alert-warning" role="alert">
+        Sorry! No records exist.
+    </div>
+}
