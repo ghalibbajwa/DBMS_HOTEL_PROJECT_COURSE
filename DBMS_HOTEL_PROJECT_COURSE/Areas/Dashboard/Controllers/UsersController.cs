@@ -1,32 +1,32 @@
 ﻿using DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.ViewModels;
-using HMS.Entities;
 using HMS.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.ViewModels.UsersViewModels;
 
 namespace DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.Controllers
 {
-    public class AccomodationsController : Controller
+    public class UsersController : Controller
     {
         AccomodationPackagesService accomodationPackagesService = new AccomodationPackagesService();
         AccomodationService accomodationsService = new AccomodationService();
 
-        public ActionResult Index(string searchTerm, int? accomodationPackageID, int? page)
+        public ActionResult Index(string searchTerm, string? roleID, int? page)
         {
 
-            AccomodationsListingModel model = new AccomodationsListingModel();
+            UsersListingModel model = new UsersListingModel();
 
             model.SearchTerm = searchTerm;
-            model.AccomodationPackageID = accomodationPackageID;
-            model.AccomodationPackages = accomodationPackagesService.GetAllAccomodationPackages();
+            model.RoleID = roleID;
+            //model.Roles = accomodationPackagesService.GetAllAccomodationPackages();
 
-            model.Accomodations = accomodationsService.SearchAccomodations(searchTerm, accomodationPackageID);
-            
+            //model.Users = accomodationsService.SearchAccomodations(searchTerm, roleID);
+           
 
-            
+
 
             return View(model);
         }

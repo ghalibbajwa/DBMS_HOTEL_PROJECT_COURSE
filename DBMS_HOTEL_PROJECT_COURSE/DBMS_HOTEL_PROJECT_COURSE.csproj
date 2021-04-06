@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,6 +44,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Hangfire.Core, Version=1.7.20.0, Culture=neutral, processorArchitecture=MSIL">
@@ -174,10 +176,12 @@
     <Compile Include="Areas\Dashboard\Controllers\AccomodationsController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\AccomodationTypesController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\UsersController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\AccomodationPackagesViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\AccomodationsViewModels.cs" />
     <Compile Include="Areas\Dashboard\ViewModels\AccomodationTypesModels.cs" />
+    <Compile Include="Areas\Dashboard\ViewModels\UsersViewModels.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -242,6 +246,11 @@
     <Content Include="Areas\Dashboard\Views\Accomodations\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Accomodations\_Action.cshtml" />
     <Content Include="Areas\Dashboard\Views\Accomodations\_Listing.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Accomodations\_Delete.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Users\_Action.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Users\_Delete.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Users\_Listing.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Users\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

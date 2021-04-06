@@ -28,7 +28,7 @@ namespace DBMS_HOTEL_PROJECT_COURSE.Areas.Dashboard.Controllers
             model.AccomodationTypes = accomodationTypesService.GetAllAccomodationTypes();
 
             model.AccomodationPackages = accomodationPackagesService.SearchAccomodationPackages(searchTerm, accomodationTypeID);
-            var totalRecords = accomodationPackagesService.SearchAccomodationPackagesCount(searchTerm, accomodationTypeID);
+            
 
            
 
